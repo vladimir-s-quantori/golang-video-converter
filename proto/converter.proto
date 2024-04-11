@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package converterProto;
+option go_package = "proto/converterProto";
+
+service ConverterService {
+  rpc ConvertVideo(ConvertRequest) returns (stream ConvertResponse) {}
+}
+
+message SampleRequest {
+  string id = 1;
+}
+
+message ConvertRequest {
+  string source_location = 1;
+  repeated string files = 2;
+  Quality quality = 3;
+  string destination_location = 4;
+}
+
+message ConvertResponse {
+  string buffer = 1;
+  int32 part = 2;
+}
+
+enum Quality {
+  SD = 0;
+  MD = 1;
+  HD = 2;
+}
